@@ -24,7 +24,6 @@ def category(request, category):
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
 
-    form = CommentForm()
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -36,6 +35,8 @@ def post_detail(request, pk):
             comment.save()
 
     comments = Comment.objects.filter(post=post)
+    form = CommentForm()
+
     context = {
         "post": post,
         "comments": comments,
